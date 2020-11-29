@@ -1,0 +1,67 @@
+n =3 m = 12 일 때 
+최대공약수는 n의 약수 [1,3] m의 약수 [1,3,4,2,6,12] n과 m의 같은수중 가장 큰수가 최대공약수
+최대공배수 n*m을 곱해 최대공약수로 나눈다. 
+
+뉴클리드 호제법을 몰라 문제를 졸라 무식하게 풀엇다 
+
+function solution(n, m) {
+  let answer = [];
+  let nNumber = []
+  let mNumber = []
+  let min = []
+// n의 약수를 구해 새로운 배열 nNumber 의 담는다
+  for(let i = 1; i <= n; i++){
+    if(n%i === 0){
+      nNumber.push(i)
+    }
+  }
+  console.log(nNumber)
+//m의 약수를 구해 새로운 배열 mNumber의 담는다.
+  for(let j = 1; j <= m; j++){
+    if(m%j === 0){
+      mNumber.push(j)
+    }
+  }
+console.log(mNumber)
+
+// n의 약수와 m의 약수중 같은 숫자를 새로운 배열 min의 담는다.
+// if..else문을 쓴이유는 nNumber의 길이가 mNumber의 길이보다 길수있고 그 반대의 경우일 수있기 때문에
+// 조건문으로 구분해줬다. 하.... 진짜 코린이는 요기까지 밖에 생각을 못했다..
+// 하지만 풀면 장땡이기 때문에 더럽게라도 풀려고 했다.
+
+  if(nNumber.length < mNumber.length){
+  for(let k =0; k < mNumber.length; k++){
+    for(let l =0; l < mNumber.length; l++){
+      if(nNumber[l]===mNumber[k]){
+        min.push(nNumber[l])
+      }
+    }
+  }
+  }else{
+    for(let k =0; k < nNumber.length; k++){
+      for(let l =0; l < nNumber.length; l++){
+        if(nNumber[k]===mNumber[l]){
+          min.push(nNumber[k])
+        }
+      }
+    }
+  }
+  console.log(min)
+// 약수중 가장 겹치는 수를 새로운 배열 min 담아 수를 비교해 가장 큰수를 
+// 변수 searchMin의 할당하고 그수를 결 과 값으로 리턴할 answer의 담아줫다.
+  let searchMin = min[0]
+  for(let m = 1; m<min.length; m++){
+    if(min[m] > searchMin)
+      searchMin = min[m]
+  }
+  answer.push(searchMin)
+  console.log(answer)
+  //마지막으로 최대공배수를 구해야하기 때문에 두수를 곱하고 answer의 담은 0번째로 나눠줫다 
+  // 그이유는 answer는 결과 값으로 담을 배열이기때문에 공배수를 구하기전에는무조건 0번째밖에 없기 때문이다.
+  let num
+  num = (n*m)/answer[0]
+  answer.push(num)
+
+  console.log(answer)
+  return answer;
+}
